@@ -16,9 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include, re_path
 
+from library_management.library.urls import author_urlpatterns, book_urlpatterns, borrow_urlpatterns
 
 api_v1_urlpatterns = [
     path('auth/', include(('library_management.users.urls', 'users'), namespace='users')),
+    path('authors/', include((author_urlpatterns, 'author'), namespace='authors')),
+    path('books/', include((book_urlpatterns, 'book'), namespace='books')),
+    path('borrow/', include((borrow_urlpatterns, 'borrow'), namespace='borrow')),
 ]
 
 urlpatterns = [

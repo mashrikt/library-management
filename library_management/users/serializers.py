@@ -23,10 +23,6 @@ class RegisterSerializer(serializers.Serializer):
         return get_adapter().clean_password(password)
 
     def validate_user_type(self, user_type):
-        print("\n\n\n")
-        print(user_type)
-
-        print("\n\n\n")
         if user_type == UserType.ADMIN:
             current_user = self.context['request'].user
             if not current_user.is_authenticated or current_user.user_type != UserType.ADMIN:
@@ -68,9 +64,6 @@ class LoginSerializer(Serializer):
 
         if email and password:
             user = self._validate_email(email, password)
-            print("\n\n")
-            print(user)
-            print("\n\n")
         else:
             msg = _('Must include "email" and "password".')
             raise ValidationError(msg)
