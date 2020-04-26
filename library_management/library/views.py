@@ -100,9 +100,6 @@ class BorrowCSVExportView(View):
         writer = csv.DictWriter(response, fieldnames=header)
         writer.writeheader()
         for row in serializer.data:
-            print("\n\n")
-            print(row)
-            print("\n\n")
             writer.writerow(row)
 
         return response

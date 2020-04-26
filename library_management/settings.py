@@ -168,3 +168,6 @@ REST_AUTH_SERIALIZERS = {
 }
 
 REST_AUTH_REGISTER_SERIALIZERS = {'REGISTER_SERIALIZER': 'library_management.users.serializers.RegisterSerializer',}
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
