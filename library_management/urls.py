@@ -17,6 +17,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include, re_path
+from rest_framework.documentation import include_docs_urls
 
 from library_management.library.urls import author_urlpatterns, book_urlpatterns, borrow_urlpatterns
 
@@ -29,6 +30,7 @@ api_v1_urlpatterns = [
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('docs/', include_docs_urls(title='Library Management')),
     path('api/v1/', include((api_v1_urlpatterns, 'v1'), namespace='v1')),
 ]
 app_name = 'users'
