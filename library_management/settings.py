@@ -41,14 +41,20 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
 
     'rest_framework',
+    'rest_framework.authtoken',
+    'rest_auth',
 
     'library_management.users'
 ]
 
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -128,6 +134,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+SITE_ID = 1
+
 AUTH_USER_MODEL = 'users.User'
 
 # Config to make the registration email only
@@ -135,3 +143,22 @@ ACCOUNT_USER_MODEL_USERNAME_FIELD = 'email'
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+    ),
+}
+
+REST_USE_JWT = True
+
+ACCOUNT_EMAIL_VERIFICATION = 'none'
+OLD_PASSWORD_FIELD_ENABLED = True
+ACCOUNT_LOGOUT_ON_GET = False
+
+REST_AUTH_SERIALIZERS = {
+    'LOGIN_SERIALIZER': 'library_management.users.serializers.LoginSerializer',
+    'USER_DETAILS_SERIALIZER': 'library_management.users.serializers.UserDetailsSerializer',
+}
+
+REST_AUTH_REGISTER_SERIALIZERS = {'REGISTER_SERIALIZER': 'library_management.users.serializers.RegisterSerializer',}

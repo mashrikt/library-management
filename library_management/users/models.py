@@ -7,6 +7,16 @@ from .managers import UserManager
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 
 
+class UserType(object):
+    ADMIN = 'admin'
+    MEMBER = 'member'
+
+    CHOICES = (
+        (ADMIN, 'admin'),
+        (MEMBER, 'member'),
+    )
+
+
 class User(AbstractBaseUser, PermissionsMixin):
     """
     A fully featured User model with admin-compliant permissions that uses
@@ -23,6 +33,7 @@ class User(AbstractBaseUser, PermissionsMixin):
                                     help_text=_('Designates whether this users should be treated as active. '
                                                 'Unselect this instead of deleting accounts.'))
     date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
+    user_type = models.CharField(max_length=6, choices=UserType.CHOICES, default=UserType.MEMBER)
 
     objects = UserManager()
 
