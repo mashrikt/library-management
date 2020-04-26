@@ -1,7 +1,7 @@
 from django.urls import path, include
 
 from .views import AuthorCreateView, AuthorUpdateView, BookCreateView, BookUpdateView, BorrowListView, BorrowUpdateView, \
-    BookBorrowView
+    BookBorrowView, BorrowCSVExportView
 
 author_urlpatterns = [
     path('', AuthorCreateView.as_view(), name='create'),
@@ -19,5 +19,6 @@ book_urlpatterns = [
 borrow_urlpatterns = [
     path('', BorrowListView.as_view(), name='list'),
     path('<int:pk>/', BorrowUpdateView.as_view(), name='update-update'),
+    path('csv/', BorrowCSVExportView.as_view(), name='csv'),
 
 ]

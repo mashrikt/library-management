@@ -1,3 +1,7 @@
+import csv
+
+from django.views.generic import View
+from django.http import HttpResponse
 from rest_framework import status
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, get_object_or_404
 from rest_framework.permissions import IsAuthenticated
@@ -7,7 +11,7 @@ from rest_framework.views import APIView
 from .models import Author, Book, Borrow
 from .permissions import IsAdminOrReadOnly, IsAdmin
 from .serializers import (AuthorSerializer, AuthorDetailSerializer, BookSerializer, BorrowSerializer,
-                          BookDetailSerializer)
+                          BookDetailSerializer, BorrowCSVSerializer)
 
 
 class AuthorCreateView(ListCreateAPIView):
@@ -73,3 +77,32 @@ class BorrowUpdateView(RetrieveUpdateDestroyAPIView):
 
     def perform_update(self, serializer):
         serializer.save(updated_by=self.request.user)
+
+
+class BorrowCSVExportView(View):
+    serializer_class = BorrowCSVSerializer
+
+    def get_serializer(self, queryset, many=True):
+        return self.serializer_class(
+            queryset,
+            many=many,
+        )
+
+    def get(self, request, *args, **kwargs):
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = 'attachment; filename="borrow.csv"'
+
+        serializer = self.get_serializer(
+            Borrow.objects.all(),
+        )
+        header = BorrowCSVSerializer.Meta.fields
+
+        writer = csv.DictWriter(response, fieldnames=header)
+        writer.writeheader()
+        for row in serializer.data:
+            print("\n\n")
+            print(row)
+            print("\n\n")
+            writer.writerow(row)
+
+        return response
