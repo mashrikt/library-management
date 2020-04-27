@@ -12,7 +12,9 @@ services:
       - DATABASE_URL=postgres://postgres@db:5432/postgres
       - SECRET_KEY=4gd*q-knfb4_qs%wf)ryfndq0x4l9&#4$i)h+amtr4!k6+r7qm
     command: bash -c "
+      while !</dev/tcp/db/5432; do sleep 1; done;
       ./manage.py migrate
+      && ./manage.py loaddata db.json
       && python manage.py runserver 0.0.0.0:8000
       "
     ports:

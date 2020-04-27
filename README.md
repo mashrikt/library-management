@@ -17,7 +17,7 @@ Clone the project and then cd into the project directory from the terminal. Run 
 $ docker-compose up --build
 ```
 
-## Running the tests
+### Running the tests
 
 On another terminal, run the following commands.
 
@@ -25,6 +25,15 @@ On another terminal, run the following commands.
 $ docker-compose exec web bash
 # pytest -v
 ```
+
+### Test Data
+
+The project will load with some sample data from the db.json file.
+
+User credentials of the existing users:
+- member@lib.com
+- admin@lib.com
+- password for both: libman99[[
 
 ## About
 
@@ -239,37 +248,14 @@ Sample Request
 
 
 #### /api/v1/borrow/{borrow_id}/
-Borrow Retrieve Update Destroy (only admin access)
+Borrow Retrieve Update Destroy endpoint(only admin access)
 
-Sample Request
+Update status of a Borrow request.
+
+Sample POST Request
 ```json
-
 {
-    "id": 1,
-    "book": {
-        "id": 2,
-        "name": "Harry Potter",
-        "author": [
-            {
-                "id": 2,
-                "name": "J.K. Rowling"
-            }
-        ]
-    },
-    "user": {
-        "id": 2,
-        "first_name": "Library",
-        "last_name": "Man",
-        "email": "lib@man.com",
-        "user_type": "member",
-        "image": null
-    },
-    "created_at": "2020-04-26T19:41:14.472073Z",
-    "updated_at": "2020-04-26T20:09:58.412439Z",
-    "status": "request",
-    "note": "",
-    "created_by": 1,
-    "updated_by": 1
+    "status": "request"
 }
 
 ```

@@ -1,0 +1,117 @@
+[
+   {
+      "model":"users.user",
+      "pk":1,
+      "fields":{
+         "password":"pbkdf2_sha256$150000$pcQySv78CuMx$0P0nQQH1GTkpcN+Sw+bg+Tb8M8FMJboMHGcPksjbBE4=",
+         "last_login":"2020-04-27T00:32:52.285Z",
+         "is_superuser":true,
+         "email":"admin@lib.com",
+         "first_name":"Admin",
+         "last_name":"Lib",
+         "is_staff":true,
+         "is_active":true,
+         "date_joined":"2020-04-27T00:32:30.685Z",
+         "user_type":"admin",
+         "image":"",
+         "groups":[
+
+         ],
+         "user_permissions":[
+
+         ]
+      }
+   },
+   {
+      "model":"users.user",
+      "pk":2,
+      "fields":{
+         "password":"pbkdf2_sha256$150000$RUU02pMpUCxk$Vy/43iixXTVOHZloGiA6GZ0ZJ4WqubVQQ8OlDK4H3r8=",
+         "last_login":"2020-04-27T00:37:39.543Z",
+         "is_superuser":false,
+         "email":"member@lib.com",
+         "first_name":"Member",
+         "last_name":"Library",
+         "is_staff":false,
+         "is_active":true,
+         "date_joined":"2020-04-27T00:33:36.077Z",
+         "user_type":"member",
+         "image":"",
+         "groups":[
+
+         ],
+         "user_permissions":[
+
+         ]
+      }
+   },
+   {
+      "model":"library.author",
+      "pk":1,
+      "fields":{
+         "name":"Sir Arthur Conna Doyle",
+         "dob":"1859-05-22",
+         "description":""
+      }
+   },
+   {
+      "model":"library.author",
+      "pk":2,
+      "fields":{
+         "name":"J.K. Rowling",
+         "dob":null,
+         "description":""
+      }
+   },
+   {
+      "model":"library.book",
+      "pk":1,
+      "fields":{
+         "name":"Sherlock Holmes",
+         "description":"",
+         "count":10,
+         "author":[
+            1
+         ]
+      }
+   },
+   {
+      "model":"library.book",
+      "pk":2,
+      "fields":{
+         "name":"Harry Potter",
+         "description":"",
+         "count":1,
+         "author":[
+            2
+         ]
+      }
+   },
+   {
+      "model":"library.book",
+      "pk":3,
+      "fields":{
+         "name":"Imaginary Book",
+         "description":"",
+         "count":99,
+         "author":[
+            1,
+            2
+         ]
+      }
+   },
+   {
+      "model":"library.borrow",
+      "pk":1,
+      "fields":{
+         "created_at":"2020-04-27T00:38:08.661Z",
+         "updated_at":"2020-04-27T00:38:08.661Z",
+         "created_by":2,
+         "updated_by":null,
+         "book":1,
+         "user":2,
+         "status":"request",
+         "note":""
+      }
+   }
+]
